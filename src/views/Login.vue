@@ -19,7 +19,7 @@
       class="form-control"
     >
     <br>
-    <button type="button" class="btn btn-primary" @click="login">Connection</button>
+    <button type="button" class="btn btn-primary" @click="login">Login</button>
     <p>You don't have an account ? You can
       <router-link to="/sign-up">create one</router-link>
     </p>
