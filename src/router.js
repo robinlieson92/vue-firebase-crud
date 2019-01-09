@@ -6,6 +6,10 @@ import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import SignUp from "./views/SignUp.vue";
 
+import AddItem from "./components/AddItem.vue";
+import EditItem from "./components/EditItem.vue";
+import ListItem from "./components/ListItem.vue";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -32,6 +36,30 @@ const router = new Router({
       path: "/home",
       name: "home",
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/add",
+      name: "add",
+      component: AddItem,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/edit/:id",
+      name: "edit",
+      component: EditItem,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/list",
+      name: "list",
+      component: ListItem,
       meta: {
         requiresAuth: true
       }
