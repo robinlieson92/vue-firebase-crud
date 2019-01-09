@@ -47,6 +47,7 @@ export default {
         )
         .then(
           user => {
+            console.log(user);
             this.$router.replace("home");
           },
           err => {
