@@ -1,6 +1,7 @@
 import Vue from "vue";
 import firebase from "firebase";
 import Router from "vue-router";
+import NProgress from "nprogress";
 
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
@@ -9,6 +10,8 @@ import SignUp from "./views/SignUp.vue";
 import AddItem from "./components/AddItem.vue";
 import EditItem from "./components/EditItem.vue";
 import ListItem from "./components/ListItem.vue";
+
+import "../node_modules/nprogress/nprogress.css";
 
 Vue.use(Router);
 
@@ -75,6 +78,19 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !currentUser) next("login");
   else if (!requiresAuth && currentUser) next("home");
   else next();
+});
+
+router.beforeResolve((to, from, next) => {
+  // to and from are both route objects. must call `next`.
+  if (to.name) {
+    NProgress.start();
+  }
+  next();
+});
+
+router.afterEach(() => {
+  // to and from are both route objects.
+  NProgress.done();
 });
 
 export default router;
