@@ -1,17 +1,25 @@
 <template>
   <div class="sign-up">
     <p>Let's create a new account !</p>
-    <input type="text" name="email" id="email" placeholder="Email" class="form-control">
+    <input
+      type="text"
+      v-model="email"
+      name="email"
+      id="email"
+      placeholder="Email"
+      class="form-control"
+    >
     <br>
     <input
       type="password"
+      v-model="password"
       name="password"
       id="password"
       placeholder="Password"
       class="form-control"
     >
     <br>
-    <button type="button" class="btn btn-primary">Sign Up</button>
+    <button type="button" @click="signUp" class="btn btn-primary">Sign Up</button>
     <span>or go back to
       <router-link to="/login">login</router-link>
     </span>
@@ -19,12 +27,34 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: "signup",
   data() {
-    return {};
+    return {
+      email: "",
+      password: ""
+    };
   },
-  methods: {}
+  methods: {
+    signUp: function() {
+      firebase
+        .auth()
+        .createUserAndRetrieveDataWithEmailAndPassword(
+          this.email,
+          this.password
+        )
+        .then(
+          user => {
+            this.$router.replace("home");
+          },
+          err => {
+            alert("Oops. " + err.message);
+          }
+        );
+    }
+  }
 };
 </script>
 
